@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<div>
+	
+	{% for id, details in recipes.items() %}
+	
+		<h2>Name of The Recipe:</h2>
+		<p>&nbsp &nbsp &nbsp{{ details['title'] }}</p>
+		<h2>Cooking Time In Minutes:</h2>
+		<p>{{ details['readyInMinutes'] }}</p>
+		<h2>Instructions:</h2>
+		<p>{{ details['instructions'] }}</p>
+		<h2>Cuisine Types:</h2>
+		<p>{{ details['cuisines'] }}</p>
+		<h2>Recipe Image:</h2>
+		<p>{{ details['image'] }}</p>
+
+	
+	{% endfor %}
+
+</div>
+
+<div>
+	<h3>Do you Want to save the recipe:</h3>
+      <form action="/favorites"> 
+        <input type="submit"
+      </form>
+</div>
+
+       
+{% endblock %}

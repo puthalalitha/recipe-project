@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+
+  <h1>Vegitarian Recipes</h1>
+   
+  <div>
+		<ul>
+			<li><a href="/search">View All Recipes</a></li>
+			<li><a href="/favorite">View Favorites</a></li>
+		</ul>
+		<ul>
+			{% if "user_id" in session %}
+				<li><a href="/logout">Logout</a></li>
+			{% else %}
+				<li><a href="/register">Register</a></li>
+				<li><a href="/login">Login</a></li>
+			{% endif %}
+		</ul>
+	</div>
+
+   
+{% endblock %}

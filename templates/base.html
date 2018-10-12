@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+<head>
+    <title>Recipes</title>
+</head>
+<body>
+
+	
+	<div>
+  		{% for flash in get_flashed_messages() %}
+    		<div>{{ flash }}</div>
+  		{% endfor %}
+	{% block content %}
+	{% endblock %}
+	</div>
+</body>
+</html>
