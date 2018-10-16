@@ -2,7 +2,7 @@ from jinja2 import StrictUndefined
 
 import requests
 
-from flask import Flask, render_template, request, flash, redirect, session
+from flask import Flask, render_template, request, flash, redirect, session, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 
 from model import connect_to_db, db, User, Recipe, Favorite
@@ -138,16 +138,50 @@ def display_results():
     return render_template("/recipe.html",
                             recipes=recipe_dict,
                             cuisine=cuisine,
-                            restrictions=limit,
-                            cook_time=time)
+                            restrictions=limit)
 
 
-@app.route('/recipe')
+@app.route('/save')
+def saved_recipes():
+    favorites = Favorite.query.filter_by(user_id=session["user_id"])
+    return render_template("favorites.html", favorites=favorites)
+
+
+@app.route('/save', methods=['POST'])
 def favorite_recipe():
-    favorite = []
-    request.args["cuisine_type"]
-    favorite_recipe_dict = 
-    favorite_recipe_dict[]
+    """Add a recipe to our database"""
+
+    spoonacular_id = request.form.get("recipeId")
+    recipe_title = request.form.get("recipeTitle")
+    recipe_url = request.form.get("recipeUrl")
+    # print("in save*****************")
+
+    # query the recipe table by id to see if this recipe
+    # is already in the database.
+    recipe = Recipe.query.get(spoonacular_id)
+
+    if not recipe:
+        new_recipe = Recipe(spoonacular_id=spoonacular_id, 
+                            title=recipe_title,
+                            url=recipe_url)
+        db.session.add(new_recipe)
+        db.session.commit()
+
+
+    fav_recipe = Favorite.query.filter_by(user_id=session["user_id"],
+                                spoonacular_id=spoonacular_id).first()
+
+    if not fav_recipe:    
+    # next, add to the favorite table.
+        fav_recipe = Favorite(user_id=session["user_id"],
+                               spoonacular_id=spoonacular_id)
+        db.session.add(fav_recipe)
+        db.session.commit()
+
+    results = {"message": "Your recipe saved.", "recipe_id": spoonacular_id}
+
+
+    return jsonify(results) 
 
 
 def get_recipes(cuisine, limit, time):
@@ -155,12 +189,13 @@ def get_recipes(cuisine, limit, time):
         "number": 5,
         "diet": limit,
         "cuisine": cuisine,
-        # add time restruction later
+        # add time restriction later
     }
 
     response = requests.get(
         spoonacular_base_endpoint + "/recipes/search",
         headers={
+
             "X-Mashape-Key": os.environ["SPOONACULAR_KEY"],
             "X-Mashape-Host": os.environ["SPOONACULAR_HOST"]
         },
@@ -195,6 +230,6 @@ if __name__ == "__main__":
     connect_to_db(app)
 
     # Use the DebugToolbar
-    # DebugToolbarExtension(app)
+    DebugToolbarExtension(app)
 
     app.run(host="0.0.0.0")

@@ -1,31 +1,59 @@
 {% extends 'base.html' %}
 {% block content %}
-<div>
+<div id="recipes-list">
 	
 	{% for id, details in recipes.items() %}
-	
+	<div>
 		<h2>Name of The Recipe:</h2>
+		<h2>Cuisine Types:</h2>
 		<p>&nbsp &nbsp &nbsp{{ details['title'] }}</p>
 		<h2>Cooking Time In Minutes:</h2>
 		<p>{{ details['readyInMinutes'] }}</p>
 		<h2>Instructions:</h2>
 		<p>{{ details['instructions'] }}</p>
-		<h2>Cuisine Types:</h2>
-		<p>{{ details['cuisines'] }}</p>
 		<h2>Recipe Image:</h2>
-		<p>{{ details['image'] }}</p>
-
-	
+		<img src="{{ details['image'] }}" alt="{{ details['title']}} weidth="100">
+		<br><br>
+		<button
+			data-recipe-id="{{ id }}"
+			data-recipe-title="{{details['title']}}"
+			data-recipe-url="{{details['sourceUrl']}}"
+			class="save-recipe"
+			type="button">Save Recipe
+		</button>
+		<div id='recipe-{{ id }}' ></div>
+	<div>
+	<hr>
 	{% endfor %}
 
 </div>
 
-<div>
-	<h3>Do you Want to save the recipe:</h3>
-      <form action="/favorites"> 
-        <input type="submit"
-      </form>
-</div>
+<script type="text/javascript">
 
+	// TODO displayResults function
+	function displayResults(results){
+		// select the div with the id recipe- + recipe_id
+		// use .html() to insert the message into that div
+		console.log(results)
+		div_tag = $(`#recipe-${results.recipe_id}`);
+		div_tag.html("Recipe saved!");
+	}
+
+	function saveRecipe(evt) {
+		evt.preventDefault();
+		let element = $(evt.target);
+		if (element.hasClass("save-recipe")) {
+			let data = element.data();
+			console.log('save recipe')
+			console.log(data);
+			// make a AJAX post request to the server including data
+			// after reponse from server is received, alert("Recipe saved!")
+			$.post("/save", data, displayResults);
+		}		
+	}
+
+	$("#recipes-list").on("click", saveRecipe);
+
+</script>
        
 {% endblock %}

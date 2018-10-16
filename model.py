@@ -30,7 +30,7 @@ class Recipe(db.Model):
 
     __tablename__ = "recipes"
 
-    recipe_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    spoonacular_id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100))
     url = db.Column(db.String(200))
 
@@ -47,7 +47,7 @@ class Favorite(db.Model):
 
     favorite_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False )
-    recipe_id = db.Column(db.Integer, db.ForeignKey('recipes.recipe_id'), nullable=False)
+    spoonacular_id = db.Column(db.Integer, db.ForeignKey('recipes.spoonacular_id'), nullable=False)
     
     user = db.relationship("User")
     recipe = db.relationship("Recipe")

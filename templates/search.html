@@ -5,22 +5,23 @@
 
   <h1>Search Information</h1>
   <form action="/results">
+    
     Cusine Type:
       <select name="cuisine_type">
         <option value="asian">Asian</option>
         <option value="mediterranean">Mediterranean</option>
         <option value="american">American</option>
       </select><br><br>
-       
+      
   Diet Restrictions:
       <select name="diet_restrictions">
         <option value="vegan">Vegan</option>
         <option value="gluten_free">Gluten free</option>
         <option value="food_allerigies">Food Allerigies</option>
       </select><br><br>
-       
+
    <label>Cooking_time
-      <input type="Available time for cooking" name="cooking_time"><br><br>
+      <input type="number" name="cooking_time"><br><br>
       <input type="submit">
     </label>
   </form>
