@@ -3,17 +3,21 @@
 
 <div>
   <h2>Favorites</h2>
-  
+
   {% for favorite in favorites %}
     <ul>
 	    <li>
 	    	{{ favorite.recipe.title }}
 	    </li>
 	    <li>
-	    	<a href="{{ favorite.recipe.url }}">Favorite Recipes!</a>
+	    	<a href="favorites/{{ favorite.recipe.spoonacular_id }}">Favorite Recipe</a>
+	    	<!-- <a href="{{ favorite.recipe.url }}">Favorite Recipe</a> -->
 	    </li>
    </ul>
   {% endfor %}
   
 </div>
 {% endblock %}
+
+
+ 

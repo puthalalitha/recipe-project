@@ -8,6 +8,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 from model import connect_to_db, db, User, Recipe, Favorite
 
 import os
+import random
 
 app = Flask(__name__)
 
@@ -115,9 +116,9 @@ def display_results():
 
     cuisine = request.args["cuisine_type"]
     limit = request.args["diet_restrictions"]
-    time = request.args["cooking_time"]
+    caution = request.args["intolerances"]
 
-    recipes = get_recipes(cuisine, limit, time)['results']
+    recipes = get_recipes(cuisine, limit, caution)['results']
     print(recipes)
 
     recipe_dict = {}
@@ -138,13 +139,7 @@ def display_results():
     return render_template("/recipe.html",
                             recipes=recipe_dict,
                             cuisine=cuisine,
-                            restrictions=limit)
-
-
-@app.route('/save')
-def saved_recipes():
-    favorites = Favorite.query.filter_by(user_id=session["user_id"])
-    return render_template("favorites.html", favorites=favorites)
+                            caution=caution)
 
 
 @app.route('/save', methods=['POST'])
@@ -158,6 +153,7 @@ def favorite_recipe():
 
     # query the recipe table by id to see if this recipe
     # is already in the database.
+    recipe = Recipe.query.get(spoonacular_id)
     recipe = Recipe.query.get(spoonacular_id)
 
     if not recipe:
@@ -180,17 +176,53 @@ def favorite_recipe():
 
     results = {"message": "Your recipe saved.", "recipe_id": spoonacular_id}
 
-
     return jsonify(results) 
 
 
-def get_recipes(cuisine, limit, time):
+@app.route('/favorites')
+def saved_recipes():
+    favorites = Favorite.query.filter_by(user_id=session["user_id"])
+    return render_template("favorites.html", favorites=favorites)
+
+
+@app.route("/favorites/<int:spoonacular_id>") #here, the id should be spoonacular_id
+def show_recipe(spoonacular_id):
+    
+    # Use the id to call get_recipe_by_id function
+    # render a favorite.html template to show the recipe info
+    recipe_result = get_recipe_by_id(spoonacular_id)
+
+    return render_template("favorite.html", details=recipe_result)
+
+
+@app.route("/remove", methods=["POST"])
+def remove_recipe():
+
+    spoonacular_id = request.form.get("recipeId")
+
+    # Query the Favorite table to see if there us a record
+    # with the user_id from the session and this spoonacular_id
+    # If there is a record with this information, delete it.
+
+    take_out_recipe = Favorite.query.filter_by(user_id=session["user_id"],
+                                               spoonacular_id=spoonacular_id).first()
+
+    if take_out_recipe:
+         
+        db.session.delete(take_out_recipe)
+        db.session.commit()
+
+    return "Recipe removed"
+
+
+def get_recipes(cuisine, limit, intolerances):
     payload = {
         "number": 5,
         "diet": limit,
         "cuisine": cuisine,
-        # add time restriction later
-    }
+        "intolerances":intolerances,
+        "offset":random.randint(0, 10)
+     }
 
     response = requests.get(
         spoonacular_base_endpoint + "/recipes/search",

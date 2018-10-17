@@ -4,14 +4,12 @@
 	
 	{% for id, details in recipes.items() %}
 	<div>
-		<h2>Name of The Recipe:</h2>
-		<h2>Cuisine Types:</h2>
-		<p>&nbsp &nbsp &nbsp{{ details['title'] }}</p>
-		<h2>Cooking Time In Minutes:</h2>
-		<p>{{ details['readyInMinutes'] }}</p>
+		<h2>{{ details['title'] }}</h2>
+		<h2>Cooking Time In Minutes:&nbsp{{ details['readyInMinutes'] }}</h2>
+		<h2>Servings:&nbsp{{ details['readyInMinutes'] }}</h2>
 		<h2>Instructions:</h2>
 		<p>{{ details['instructions'] }}</p>
-		<h2>Recipe Image:</h2>
+		<h2>{{details['title']}} image:</h2>
 		<img src="{{ details['image'] }}" alt="{{ details['title']}} weidth="100">
 		<br><br>
 		<button
@@ -30,13 +28,13 @@
 
 <script type="text/javascript">
 
-	// TODO displayResults function
+	//displayResults function
 	function displayResults(results){
 		// select the div with the id recipe- + recipe_id
 		// use .html() to insert the message into that div
 		console.log(results)
 		div_tag = $(`#recipe-${results.recipe_id}`);
-		div_tag.html("Recipe saved!");
+		div_tag.html("Recipe Saved!");
 	}
 
 	function saveRecipe(evt) {
