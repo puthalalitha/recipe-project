@@ -103,9 +103,14 @@ def logout():
     return redirect("/")
 
 
+
 @app.route('/search')
 def user_info():
     """User information"""
+
+    if "user_id" not in session:
+        flash("Please log in.")
+        return redirect('/')
 
     return render_template("/search.html")
 
@@ -181,6 +186,11 @@ def favorite_recipe():
 
 @app.route('/favorites')
 def saved_recipes():
+
+    if "user_id" not in session:
+        flash("Please log in.")
+        return redirect('/')
+
     favorites = Favorite.query.filter_by(user_id=session["user_id"])
     return render_template("favorites.html", favorites=favorites)
 
