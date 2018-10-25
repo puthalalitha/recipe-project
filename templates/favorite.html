@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+	<div>
+		<h2>{{ details['title'] }}</h2>
+		<h2>Cooking Time In Minutes:&nbsp;{{ details['readyInMinutes'] }}</h2>
+		<h2>Servings:&nbsp;{{ details['servings'] }}</h2>
+		<img src="{{ details['image'] }}" alt="{{ details['title']}} weidth="100">
+		<h2>Instructions:</h2>
+		<p>{{ details['instructions'] }}</p>
+		<!-- <h2>{{details['title']}} image:</h2> -->
+		<br><br>
+		<button
+			id ="remove-button"
+			data-recipe-id="{{ details['id'] }}"
+			class="remove-recipe"
+			type="button">Remove Recipe
+		</button>
+		<div id="recipe-message" ></div>
+	<div>
+
+	<script type="text/javascript">
+		function changeResults(results) {
+			console.log(results);
+			div_tag = $('#recipe-message')
+			div_tag.html("Recipe Removed!");
+			alert("Recipe Removed!")
+			window.location ="/favorites"
+		}
+
+		function removeRecipe(evt) {
+			let element = $(evt.target);
+			
+			let data = element.data();
+			console.log("remove recipe");
+	
+			$.post("/remove", data, changeResults);	
+		}
+		
+		$("#remove-button").on("click", removeRecipe);
+
+	</script> 
+{% endblock %}
+ 

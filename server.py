@@ -123,23 +123,28 @@ def display_results():
     limit = request.args["diet_restrictions"]
     caution = request.args["intolerances"]
 
-    recipes = get_recipes(cuisine, limit, caution)['results']
-    print(recipes)
+    recipes = get_recipes(cuisine, limit, caution)
+    # print(recipes)
 
     recipe_dict = {}
 
     for recipe in recipes:
         recipe_id = recipe['id']
         details = get_recipe_by_id(recipe_id)
+        # print(details)
         if details['instructions'] is None:
             continue
+
+        if details['image'] is None:
+            continue
+
         recipe_dict[recipe_id]= details
 
         if len(recipe_dict) == 2:
             break
 
     r_id = list(recipe_dict.keys())[0]
-    print(list(recipe_dict[r_id].keys()))
+    # print(list(recipe_dict[r_id].keys()))
 
     return render_template("/recipe.html",
                             recipes=recipe_dict,
@@ -158,7 +163,6 @@ def favorite_recipe():
 
     # query the recipe table by id to see if this recipe
     # is already in the database.
-    recipe = Recipe.query.get(spoonacular_id)
     recipe = Recipe.query.get(spoonacular_id)
 
     if not recipe:
@@ -243,7 +247,8 @@ def get_recipes(cuisine, limit, intolerances):
         },
         params=payload
     )
-    return response.json()
+    # print(response.json()['results'])
+    return response.json()['results']
 
  
 def get_recipe_by_id(id):
@@ -269,7 +274,7 @@ if __name__ == "__main__":
     # that we invoke the DebugToolbarExtension
     app.debug = True
 
-    connect_to_db(app)
+    connect_to_db(app,'postgresql:///recipes')
 
     # Use the DebugToolbar
     DebugToolbarExtension(app)

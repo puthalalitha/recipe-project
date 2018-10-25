@@ -5,9 +5,9 @@
 	{% for id, details in recipes.items() %}
 	<div>
 		<h2>{{ details['title'] }}</h2>
-		<h2>Cooking Time In Minutes:&nbsp{{ details['readyInMinutes'] }}</h2>
-		<h2>Servings:&nbsp{{ details['servings'] }}</h2>
-		<img src="{{ details['image'] }}" alt="{{ details['title']}} weidth="100">
+		<h2>Cooking Time In Minutes:&nbsp;{{ details['readyInMinutes'] }}</h2>
+		<h2>Servings:&nbsp;{{ details['servings'] }}</h2>
+		<img src="{{ details['image'] }}" alt="{{ details['title']}} width="100">
 		<h2>Instructions:</h2>
 		<p>{{ details['instructions'] }}</p>
 		<!-- <h2>{{details['title']}} image:</h2> -->
