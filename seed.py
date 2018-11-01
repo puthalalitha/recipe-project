@@ -2,7 +2,7 @@ from model import User, Recipe, Favorite, connect_to_db, db
 
 def example_data():
     lalitha = User(email="lalitha@recipe.com", password="123")
-     
+    fluffy = User(email="fluffy@gmail.com", password="f6e0a1e2ac41945a9aa7ff8a8aaa0cebc12a3bcc981a929ad5cf810a090e11ae")
     dall = Recipe(title="dall")
     lalitha_fav = Favorite(user=lalitha, recipe=dall)
     db.session.add_all([lalitha, dall])

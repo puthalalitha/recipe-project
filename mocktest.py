@@ -17,6 +17,14 @@ def _mock_get_recipes(cuisine, limit, caution):
             ]
 
 
+def _mock_get_recipes_by_name(recipe_name):
+    return [
+    {"number": 5,
+        "query": 'Jollof Rice' 
+     }]
+         
+
+
 # Make mock for get recipe by id
 def _mock_get_recipe_by_id(details_id=716275):
     results = {
@@ -171,7 +179,15 @@ class MockFlaskTests(TestCase):
         
         self.assertIsNone(take_out_recipe)
   
- 
+    
+    def test_recipe_by_name(self):
+        results = self.client.get("/recipe-by-name")
+        recipe_name = Recipe.query.filter_by(title="Native Jollof Rice - Iwuk Edesi", spoonacular_id="716275").first()
+
+        self.assertIsNone(recipe_name)
+
+
+         
 
 if __name__ == "__main__":
     import unittest

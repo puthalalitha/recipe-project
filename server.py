@@ -10,6 +10,8 @@ from model import connect_to_db, db, User, Recipe, Favorite
 import os
 import random
 
+import hashlib
+
 app = Flask(__name__)
 
 # Required to use Flask sessions and the debug toolbar
@@ -44,6 +46,9 @@ def register_process():
     # take user input from register_form.html
     email = request.form["email"]
     password = request.form["password"]
+    password = password.encode() # converts into byte type
+    hash_pwd = hashlib.sha256(password) # creates SHA-256 hash object
+    hash_pwd = hash_pwd.hexdigest() # convert it into hexadecimal form
 
     # query users table in database, retrieve user instance that matches email.
     user = User.query.filter(User.email == email).first()
@@ -54,7 +59,7 @@ def register_process():
         return redirect("/login")
 
     # if email is not already in database, create new instance of User class.
-    new_user = User(email=email, password=password)
+    new_user = User(email=email, password=hash_pwd)
     # add new user instance to users table in database.
     db.session.add(new_user)
     db.session.commit()
@@ -77,6 +82,11 @@ def login_process():
     # Get from variables
     email = request.form["email"]
     password = request.form["password"]
+    password = password.encode() # converts into byte type
+    hash_pwd = hashlib.sha256(password) # creates SHA-256 hash object
+    hash_pwd = hash_pwd.hexdigest() # convert it into hexadecimal form
+
+    print(hash_pwd)
 
     user = User.query.filter_by(email=email).first()
 
@@ -84,7 +94,7 @@ def login_process():
         flash("No such user")
         return redirect("/login")
 
-    if password==user.password:
+    if user.password==hash_pwd:
         session["user_id"] = user.user_id
 
         flash("Logged in")
@@ -143,13 +153,39 @@ def display_results():
         if len(recipe_dict) == 2:
             break
 
-    r_id = list(recipe_dict.keys())[0]
-    # print(list(recipe_dict[r_id].keys()))
-
     return render_template("/recipe.html",
                             recipes=recipe_dict,
                             cuisine=cuisine,
                             caution=caution)
+
+
+@app.route('/recipe-by-name', methods=["GET"])
+def display_results_by_name():
+    """displays recipes by the name"""
+
+    user_enter_recipe = request.args["recipe_name"]
+
+    recipes = get_recipes_by_name(user_enter_recipe)
+
+    recipe_dict = {}
+
+    for recipe in recipes:
+        recipe_id = recipe['id']
+        details = get_recipe_by_id(recipe_id)
+
+        if details['instructions'] is None:
+            continue
+
+        recipe_dict[recipe_id] = details
+
+        if len(recipe_dict) == 2:
+            break
+
+    return render_template("/recipe.html",
+                            recipes=recipe_dict,
+                            cuisine=None,
+                            caution=None)
+
 
 
 @app.route('/save', methods=['POST'])
@@ -227,6 +263,26 @@ def remove_recipe():
         db.session.commit()
 
     return "Recipe removed"
+
+
+def get_recipes_by_name(recipe_name):
+    payload = {
+        "number": 5,
+        "query": recipe_name 
+     }
+
+
+    response = requests.get(
+        spoonacular_base_endpoint + "/recipes/autocomplete",
+        headers={
+            "X-Mashape-Key": os.environ["SPOONACULAR_KEY"],
+            "X-Mashape-Host": os.environ["SPOONACULAR_HOST"]
+        },
+        params=payload
+    )
+    print(response.json())
+    return response.json()
+
 
 
 def get_recipes(cuisine, limit, intolerances):

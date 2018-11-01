@@ -5,9 +5,10 @@
 
   <h1>Recipe Search Information</h1>
   <form action="/results">
-    
+
     Cusine Type:
       <select name="cuisine_type">
+        <option value="">Select</option>
         <option value="african">African</option>
         <option value="chinese">Chinese</option>
         <option value="japanese">Japanese</option>
@@ -36,6 +37,7 @@
       
     Diet Restrictions:
       <select name="diet_restrictions">
+        <option value="">Select</option>
         <option value="pescetarian">Pescetarian</option>
         <option value="lacto vegetarian">Lacto Vegetarian</option>
         <option value="ovo vegetarian">Ovo Vegetarian</option>
@@ -58,11 +60,24 @@
         <option value="tree nut">Tree nut</option>
         <option value="wheat">Wheat</option>
       </select><br><br>
-
-    <input type="submit">
+        
+    <input type="submit"><br><br>
 
   </form>
-    
- 
+
+  <form action="/recipe-by-name">
+    <h1>Search By Recipe Name:</h1>
+        <p>Try searching by name or partial name.</p>
+       <label>Enter a Recipe Name:
+            <input type="text" name="recipe_name"<br>
+        </label>
+    <div>
+      <input type="Submit">
+    </div>
+
+  </form>
+
 </div>
+
+
 {% endblock %}

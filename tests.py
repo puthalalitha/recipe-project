@@ -79,7 +79,7 @@ class FlaskTestsDatabase(TestCase):
         """Test login page."""
 
         result = self.client.post("/login",
-                                  data={"email": "keerthy@recipe.com", "password": "123"},
+                                  data={"email": "fluffy@gmail.com", "password": "111"},
                                   follow_redirects=True)
         self.assertIn(b"Login", result.data)
 
@@ -99,7 +99,10 @@ class FlaskTestsDatabase(TestCase):
         self.assertIn(b"Login", result.data)
 
 
+    def test_recipe_by_name(self):
+        result = self.client.get("/recipe-by-name", follow_redirects=True)
 
+        self.assertIn(b"", result.data)
 
       
 

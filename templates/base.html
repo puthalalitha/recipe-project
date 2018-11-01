@@ -14,6 +14,8 @@
 
 
     <style>
+     /* h1, h2, h3, .navbar-brand { font-family: "Frijole"; }*/
+
 
       #homepage-title {
           margin: 0;
@@ -25,7 +27,7 @@
           font-size: 500%;
       }
 
-    /*  #homepage-title {
+      #homepage-title {
           margin: 0;
           top: 0.5em;
           width: 100%;
@@ -40,17 +42,11 @@
         margin: 0;
         background-color: Orange;
       }
-      #extending {
-                    margin: 0px;
-                    padding: 0px;
-                    background-color: #B22222;
-                    width: 100%;
-                    height: 100%;
-                 }
+      
       .spaced {
         margin-left:20px; 
         margin-top: 20px;
-      }*/
+      }
 
 
     </style>
@@ -59,27 +55,25 @@
 <body>
   <div class="container-fluid">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">World Wide Recipes</a>
+  <a class="navbar-brand" href="#"><i class="fas fa-globe"></i>&nbsp; World Wide Recipes </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="/search">Search</a>
-      <a class="nav-item nav-link" href="/favorites">Favorites</a>
-      <a class="nav-item nav-link" href="/login">Login</a>
-      <a class="nav-item nav-link disabled" href="/logout">Logout</a>
+      <a class="nav-item nav-link active" href="/"><i class="fas fa-home"></i>&nbsp;Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="/search"><i class="fas fa-utensils"></i>&nbsp;Search</a>
+      <a class="nav-item nav-link" href="/favorites"><i class="fas fa-star"></i>&nbsp;Favorites</a>
+      <a class="nav-item nav-link" href="/login"><i class="fas fa-sign-in-alt"></i>&nbsp;Login</a>
+      <a class="nav-item nav-link disabled" href="/logout"><i class="fas fa-sign-out-alt"></i>&nbsp;Logout</a>
     </div>
   </div>
 </nav>
-	 
+  	 
 	<div>
   		{% for flash in get_flashed_messages() %}
     		<div>{{ flash }}</div>
   		{% endfor %}
-
-  	<!-- {# include '/_navbar.html' #} -->
 
 
   	<!-- Latest compiled and minified JQuery -->
