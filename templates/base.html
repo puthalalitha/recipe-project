@@ -14,7 +14,23 @@
 
 
     <style>
-     /* h1, h2, h3, .navbar-brand { font-family: "Frijole"; }*/
+      h1, h2, h3, .navbar-brand { font-family: "Frijole"; }
+
+      #search{
+        background-color: rgba(128, 26, 18, .5)
+      }
+
+
+
+      #homepage-block{
+        background-color: rgba(23, 138, 0, .5)
+      }
+
+      .favorites{
+        background-color: rgba(255, 255, 255, .5);
+        width:30%;
+      }
+
 
 
       #homepage-title {
@@ -27,7 +43,7 @@
           font-size: 500%;
       }
 
-      #homepage-title {
+      /*#homepage-title {
           margin: 0;
           top: 0.5em;
           width: 100%;
@@ -35,26 +51,126 @@
           color: black;
           font-weight: 400;
           font-size: 500%;
-      }
+      }*/
        html, body {
         width: 100%;
         height: 100%;
         margin: 0;
-        background-color: Orange;
+        background: rgba(255,165,0, 0.0);
+
       }
-      
+
       .spaced {
         margin-left:20px; 
         margin-top: 20px;
       }
 
+      .bg_picture1{
+        background: url("../static/cardamom-2244253_1920.jpg") no-repeat center center;
+        background-size: cover;
 
+        /*filter: opacity(0.6);
+        filter: blur(1px);*/
+
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        z-index: -1;
+      }
+
+      .bg_picture2{
+        background: url("../static/food-3310166_1920.jpg") no-repeat center center;
+        background-size: cover;
+
+        /*filter: opacity(0.6);
+        filter: blur(1px);
+*/
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        z-index: -1;
+      }
+
+      .bg_picture3{
+        background: url("../static/brooke-lark-230140-unsplash.jpg") no-repeat center center;
+        background-size: cover;
+
+        /*filter: opacity(0.6);
+        filter: blur(1px);
+*/
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        z-index: -1;
+      }
+
+      .bg_picture4{
+        background: url("../static/cardamom-2244253_1920.jpg") no-repeat center center;
+        background-size: cover;
+
+        /*filter: opacity(0.6);
+        filter: blur(1px);
+*/
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        z-index: -1;
+      }
+
+      .bg_picture5{
+        background: url("../static/kitchen-2565479_1920.jpg") no-repeat center center;
+        background-size: cover;
+
+        /*filter: opacity(0.6);
+        filter: blur(1px);*/
+
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        z-index: -1;
+      }
+
+
+
+
+
+      /*.inline-block-paragraph {
+        display: inline-block;
+        width: 150px;
+        height: 150px;
+        vertical-align: top;
+      }*/
+
+      /*p {
+        margin-left: 150px;
+        margin-right: 150px;
+        text-align: center;
+        font-family: 'Playfair Display', serif;
+        font-weight: 400;
+        font-size: 18px;
+        color: #e7d1bc;
+      }
+*/
     </style>
 
 </head>
 <body>
-  <div class="container-fluid">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#"><i class="fas fa-globe"></i>&nbsp; World Wide Recipes </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -64,11 +180,14 @@
       <a class="nav-item nav-link active" href="/"><i class="fas fa-home"></i>&nbsp;Home <span class="sr-only">(current)</span></a>
       <a class="nav-item nav-link" href="/search"><i class="fas fa-utensils"></i>&nbsp;Search</a>
       <a class="nav-item nav-link" href="/favorites"><i class="fas fa-star"></i>&nbsp;Favorites</a>
+      <a class="nav-item nav-link" href="/register"><<i class="fas fa-registered"></i></i>&nbsp;Register</a>
       <a class="nav-item nav-link" href="/login"><i class="fas fa-sign-in-alt"></i>&nbsp;Login</a>
       <a class="nav-item nav-link disabled" href="/logout"><i class="fas fa-sign-out-alt"></i>&nbsp;Logout</a>
     </div>
   </div>
 </nav>
+
+  <div class="container-fluid">
   	 
 	<div>
   		{% for flash in get_flashed_messages() %}
@@ -91,4 +210,4 @@
 </body>
 </html>
 
-
+  

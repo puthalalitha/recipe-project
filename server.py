@@ -134,14 +134,15 @@ def display_results():
     caution = request.args["intolerances"]
 
     recipes = get_recipes(cuisine, limit, caution)
-    # print(recipes)
+    print(recipes)
 
     recipe_dict = {}
 
     for recipe in recipes:
         recipe_id = recipe['id']
+        #print('*********',recipe_id)
         details = get_recipe_by_id(recipe_id)
-        # print(details)
+        #print('&&&&&&&&&',details)
         if details['instructions'] is None:
             continue
 
@@ -171,6 +172,7 @@ def display_results_by_name():
 
     for recipe in recipes:
         recipe_id = recipe['id']
+        # print(recipe_id,'%%%%%')
         details = get_recipe_by_id(recipe_id)
 
         if details['instructions'] is None:
@@ -250,7 +252,7 @@ def remove_recipe():
 
     spoonacular_id = request.form.get("recipeId")
 
-    # Query the Favorite table to see if there us a record
+    # Query the Favorite table to see if there is a record
     # with the user_id from the session and this spoonacular_id
     # If there is a record with this information, delete it.
 
@@ -280,7 +282,7 @@ def get_recipes_by_name(recipe_name):
         },
         params=payload
     )
-    print(response.json())
+    # print('%%%',response.json())
     return response.json()
 
 
@@ -303,7 +305,7 @@ def get_recipes(cuisine, limit, intolerances):
         },
         params=payload
     )
-    # print(response.json()['results'])
+    #print(response.json()['results']
     return response.json()['results']
 
  
@@ -323,8 +325,6 @@ def get_recipe_by_id(id):
 
 
 
-
-
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the point
     # that we invoke the DebugToolbarExtension
@@ -333,6 +333,6 @@ if __name__ == "__main__":
     connect_to_db(app,'postgresql:///recipes')
 
     # Use the DebugToolbar
-    DebugToolbarExtension(app)
+    # DebugToolbarExtension(app)
 
     app.run(host="0.0.0.0")

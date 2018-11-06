@@ -4,6 +4,7 @@ from model import connect_to_db, db, User, Favorite, Recipe
 from seed import example_data
 from flask import session
 import server
+import tests
 
 
 # Make mock for get recipes

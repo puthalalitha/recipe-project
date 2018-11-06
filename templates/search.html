@@ -1,14 +1,22 @@
 
 {% extends 'base.html' %}
 {% block content %}
+<!-- <div class="container">
+ <div class="row">
+ <div class="col-6">   
+
+ -->
 <div>
 
-  <h1>Recipe Search Information</h1>
+<div class="bg_picture3"></div>
+<div id="search"></div>
+<div class="spaced" style="width:40%">
+  <h3>Recipe Search Information</h3>
   <form action="/results">
 
-    Cusine Type:
-      <select name="cuisine_type">
-        <option value="">Select</option>
+    <!-- Cusine Type: -->
+      <select class="form-control form-control-lg" name="cuisine_type">
+        <option value="">Cusine Type</option>
         <option value="african">African</option>
         <option value="chinese">Chinese</option>
         <option value="japanese">Japanese</option>
@@ -33,21 +41,21 @@
         <option value="eastern european">Eastern European</option>
         <option value="caribbean">Caribbean</option>
         <option value="latin american">Latin American</option>
-      </select><br><br>
+      </select><br>
       
-    Diet Restrictions:
-      <select name="diet_restrictions">
-        <option value="">Select</option>
+    <!-- Diet Restrictions: -->
+      <select class="form-control form-control-lg" name="diet_restrictions">
+        <option value="">Diet Restrictions</option>
         <option value="pescetarian">Pescetarian</option>
         <option value="lacto vegetarian">Lacto Vegetarian</option>
         <option value="ovo vegetarian">Ovo Vegetarian</option>
         <option value="vegan">Vegan</option>
         <option value="vegetarian">Vegetarian</option>
-      </select><br><br>
+      </select><br>
 
-    Intolerances:
-      <select name="intolerances">
-        <option value="">No Restrictions</option>
+    <!-- Intolerances: -->
+      <select class="form-control form-control-lg" name="intolerances">
+        <option value="">Intolerances</option>
         <option value="dairy">Dairy</option>
         <option value="egg">Egg</option>
         <option value="gluten">Gluten</option>
@@ -59,23 +67,26 @@
         <option value="sulfite">Sulfite</option>
         <option value="tree nut">Tree nut</option>
         <option value="wheat">Wheat</option>
-      </select><br><br>
+      </select><br>
         
-    <input type="submit"><br><br>
+    <!-- <input type="submit"><br><br> -->
+    <button type="submit" class="btn btn-primary">Submit</button>
 
-  </form>
+  </form><br>
+ 
+  
 
-  <form action="/recipe-by-name">
-    <h1>Search By Recipe Name:</h1>
-        <p>Try searching by name or partial name.</p>
-       <label>Enter a Recipe Name:
-            <input type="text" name="recipe_name"<br>
-        </label>
-    <div>
-      <input type="Submit">
-    </div>
+<form action="/recipe-by-name">
+    <h3>Search By Recipe Name:</h3>
+    <!-- <h6>Try searching by name or partial name.</h6> -->
+  <div class="form-group">
+    <label>Enter a Recipe Name:</label>
+    <input type="text" name="recipe_name" class="form-control" placeholder="Try searching by name or partial name.">
 
-  </form>
+  </div>
+   
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
 
 </div>
 

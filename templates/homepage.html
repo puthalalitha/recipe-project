@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
-<div id="homepage-block"
-  <h1 id="homepage-title">Welcome to World Wide Recipes</h1>
+<div class="bg_picture5"></div>
+<div class="spaced" style="width:40%">
+<br><br><br><br><br><br><br><br><br><br><div id="homepage-block"
+   id="homepage-title"><h1>Welcome to World Wide Recipes</h1>
    
- 	  <div>
+ 	  <h3><div>
 			{% if "user_id" in session %}
 			<ul>
 			  <li><a href="/search">View All Recipes</a></li>
 			  <li><a href="/favorites">View Favorites</a></li>
-		    </ul>  
-			<ul>
 				<li><a href="/logout">Logout</a></li>
 			</ul>
 			{% else %}
@@ -18,7 +18,7 @@
 				<li><a href="/login">Login</a></li>
 			</ul>
 			{% endif %}
-	</div>   
+	</div></h3>  
 {% endblock %}
 
  
