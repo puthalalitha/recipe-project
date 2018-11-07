@@ -18,26 +18,28 @@
 		<div id="recipe-message" ></div>
 	<div>
  -->
-
+ 
 <div class="bg_picture6"></div>
 <div class="container">
 	<div class="row">
 
 		<div class="col-12">
 			<div class="col-12">
-					<h2>{{ details['title'] }}</h2>
-					<h2>Cooking Time In Minutes:&nbsp;{{ details['readyInMinutes'] }}</h2>
-					<h2>Servings:&nbsp;{{ details['servings'] }}</h2>
-					<img src="{{ details['image'] }}" alt="{{ details['title']}} width="100">
+					<h2 class="recipe">{{ details['title'] }}</h2><br> 	
+					<div class="recipe1">
+					<img src="{{ details['image'] }}" alt="{{ details['title']}} width="50">
+					</div>
+					<h4>Cooking Time In Minutes:&nbsp;{{ details['readyInMinutes'] }}</h4>
+					<h4>Servings:&nbsp;{{ details['servings'] }}</h4>
 					<h2>Instructions:</h2>
-					<p>{{ details['instructions'] | safe }}</p><br><br>
+					<p>{{ details['instructions'] | safe }}</p>
 					<button
 						id ="remove-button"
 						data-recipe-id="{{ details['id'] }}"
 						class="remove-recipe"
 						type="button">Remove Recipe
 					</button>
-				<div id="recipe-message" ></div>
+				<div id="recipe-message">
 			</div>
 		</div>
 	</div>

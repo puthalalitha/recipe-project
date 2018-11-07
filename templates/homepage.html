@@ -4,13 +4,13 @@
 <div class="spaced" style="width:40%">
 <br><br><br><br><br><br><br><br><br><br><div id="homepage-block"
    id="homepage-title"><h1>Welcome to World Wide Recipes</h1>
-   
+   <h4>Discover delicious recipes according to your taste</h4>
  	  <h3><div>
 			{% if "user_id" in session %}
 			<ul>
 			  <li><a href="/search">View All Recipes</a></li>
 			  <li><a href="/favorites">View Favorites</a></li>
-				<li><a href="/logout">Logout</a></li>
+			  <li><a href="/logout">Logout</a></li>
 			</ul>
 			{% else %}
 			<ul>
