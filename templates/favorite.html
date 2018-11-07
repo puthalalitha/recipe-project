@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
-	<div>
+	<!-- <div>
 		<h2>{{ details['title'] }}</h2>
 		<h2>Cooking Time In Minutes:&nbsp;{{ details['readyInMinutes'] }}</h2>
 		<h2>Servings:&nbsp;{{ details['servings'] }}</h2>
 		<img src="{{ details['image'] }}" alt="{{ details['title']}} weidth="100">
 		<h2>Instructions:</h2>
-		<p>{{ details['instructions'] }}</p>
-		<!-- <h2>{{details['title']}} image:</h2> -->
+		<p>{{ details['instructions'] }}</p> -->
+		<!-- <h2>{{details['title']}} image:</h2>
 		<br><br>
 		<button
 			id ="remove-button"
@@ -17,6 +17,32 @@
 		</button>
 		<div id="recipe-message" ></div>
 	<div>
+ -->
+
+<div class="bg_picture6"></div>
+<div class="container">
+	<div class="row">
+
+		<div class="col-12">
+			<div class="col-12">
+					<h2>{{ details['title'] }}</h2>
+					<h2>Cooking Time In Minutes:&nbsp;{{ details['readyInMinutes'] }}</h2>
+					<h2>Servings:&nbsp;{{ details['servings'] }}</h2>
+					<img src="{{ details['image'] }}" alt="{{ details['title']}} width="100">
+					<h2>Instructions:</h2>
+					<p>{{ details['instructions'] | safe }}</p><br><br>
+					<button
+						id ="remove-button"
+						data-recipe-id="{{ details['id'] }}"
+						class="remove-recipe"
+						type="button">Remove Recipe
+					</button>
+				<div id="recipe-message" ></div>
+			</div>
+		</div>
+	</div>
+</div>
+
 
 	<script type="text/javascript">
 		function changeResults(results) {

@@ -16,8 +16,12 @@
     <style>
       h1, h2, h3, .navbar-brand { font-family: "Frijole"; }
 
+      #recipes-list { margin-top: 50px; }
+
+       
       #search{
-        background-color: rgba(128, 26, 18, .5)
+        background-color: rgba(144, 9, 6, .5);
+        width:50%;
       }
 
 
@@ -27,7 +31,7 @@
       }
 
       .favorites{
-        background-color: rgba(255, 255, 255, .5);
+        background-color: rgba(174, 202, 199, .5);
         width:30%;
       }
 
@@ -145,6 +149,25 @@
         z-index: -1;
       }
 
+      .bg_picture6{
+        background: url("../static/sayagata-400px.png") no-repeat center center;
+        background-size: cover;
+        /*filter: opacity(0.6);
+        filter: blur(1px);*/
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        z-index: -1;
+      }
+
+      .content-div {
+        width: 100%;
+        height: auto;
+      }
+
 
 
 
@@ -178,22 +201,27 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       <a class="nav-item nav-link active" href="/"><i class="fas fa-home"></i>&nbsp;Home <span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="/search"><i class="fas fa-utensils"></i>&nbsp;Search</a>
-      <a class="nav-item nav-link" href="/favorites"><i class="fas fa-star"></i>&nbsp;Favorites</a>
-      <a class="nav-item nav-link" href="/register"><<i class="fas fa-registered"></i></i>&nbsp;Register</a>
-      <a class="nav-item nav-link" href="/login"><i class="fas fa-sign-in-alt"></i>&nbsp;Login</a>
-      <a class="nav-item nav-link disabled" href="/logout"><i class="fas fa-sign-out-alt"></i>&nbsp;Logout</a>
+      <a class="nav-item nav-link" href="/search">
+        <i class="fas fa-utensils"></i>&nbsp;Search</a>
+      <a class="nav-item nav-link" href="/favorites">
+        <i class="fas fa-star"></i>&nbsp;Favorites</a>
+      <a class="nav-item nav-link" href="/register">
+        <i class="fas fa-registered"></i></i>&nbsp;Register</a>
+      <a class="nav-item nav-link" href="/login">
+        <i class="fas fa-sign-in-alt"></i>&nbsp;Login</a>
+      <a class="nav-item nav-link disabled" href="/logout">
+        <i class="fas fa-sign-out-alt"></i>&nbsp;Logout</a>
     </div>
   </div>
 </nav>
 
-  <div class="container-fluid">
+  <div class="content-div container-fluid">
   	 
 	<div>
   		{% for flash in get_flashed_messages() %}
     		<div>{{ flash }}</div>
   		{% endfor %}
-
+  </div>
 
   	<!-- Latest compiled and minified JQuery -->
 	<script
@@ -206,7 +234,7 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 	
 	{% block content %}{% endblock %}
-  </div>
+  
 </body>
 </html>
 

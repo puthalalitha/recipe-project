@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+<div class="bg_picture6"></div>
 <div id="recipes-list">
 
 	{% if not recipes %}
@@ -8,39 +9,35 @@
 		</div>
 	{% endif %}
 	
-	{% for id, details in recipes.items() %}
-	<div>
-		<h2>{{ details['title'] }}</h2>
-		<h2>Cooking Time In Minutes:&nbsp;{{ details['readyInMinutes'] }}</h2>
-		<h2>Servings:&nbsp;{{ details['servings'] }}</h2>
-		<div class="container">
+
+	<div class="container">
+	{% for id, details in recipes.items() %}			
 			<div class="row">
-				<div class="col-4 offset-2">
+				
+				<div class="col-12">
+					<h2>{{ details['title'] }}</h2>
+					<h2>Cooking Time In Minutes:&nbsp;{{ details['readyInMinutes'] }}</h2>
+					<h2>Servings:&nbsp;{{ details['servings'] }}</h2>
 					<img src="{{ details['image'] }}" alt="{{ details['title']}} width="100">
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-2">
 					<h2>Instructions:</h2>
-				</div>
-			</div>
-		<p>{{ details['instructions'] | safe }}</p>
-		<!-- <h2>{{details['title']}} image:</h2> -->
-		<br><br>
-		<button
-			data-recipe-id="{{ id }}"
-			data-recipe-title="{{details['title']}}"
-			data-recipe-url="{{details['sourceUrl']}}"
-			class="save-recipe"
-			type="button">Save Recipe
-		</button>
-		<div id='recipe-{{ id }}' ></div>
-	<div>
-	<hr>
+					<p>{{ details['instructions'] | safe }}</p>
+					<br><br>
+					<button
+						data-recipe-id="{{ id }}"
+						data-recipe-title="{{details['title']}}"
+						data-recipe-url="{{details['sourceUrl']}}"
+						class="save-recipe"
+						type="button">Save Recipe
+					</button> 
+					<div id='recipe-{{ id }}' ></div>
+				</div> 
+				
+			</div> <!-- row ends -->
+			<hr>
 	{% endfor %}
+	</div> <!-- container ends -->
 
-</div>
+</div> <!-- recipies list end -->
 
 <script type="text/javascript">
 
@@ -68,6 +65,5 @@
 
 	$("#recipes-list").on("click", saveRecipe);
 
-</script>
-       
+</script>     
 {% endblock %}
